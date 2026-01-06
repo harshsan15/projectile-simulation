@@ -7,7 +7,7 @@ import {
 } from "./physics";
 import { renderScene } from "./renderer";
 
-const PROJECTILE_SPEED = 550; // px/s [web:29]
+const PROJECTILE_SPEED = 600; // px/s [web:29]
 const BARREL_LENGTH = 50;
 
 export class GameEngine {
@@ -17,6 +17,7 @@ export class GameEngine {
   private lastTimestamp: number | null = null;
   private animationFrameId: number | null = null;
   private projectileIdCounter = 0;
+  private targetConfigs: TargetConfig[];
 
   constructor(
     ctx: CanvasRenderingContext2D,
@@ -25,8 +26,19 @@ export class GameEngine {
   ) {
     this.ctx = ctx;
     this.canvas = canvas;
+    this.targetConfigs = targetConfigs;
 
-    const targets: TargetState[] = targetConfigs.map((t) => ({
+    const targets: TargetState[] = this.targetConfigs.map((t) => ({
+      ...t,
+      hit: false,
+    }));
+
+    this.state = createInitialState(targets);
+    this.calculateTheoreticals();
+  }
+
+  reset() {
+    const targets: TargetState[] = this.targetConfigs.map((t) => ({
       ...t,
       hit: false,
     }));

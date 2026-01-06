@@ -85,6 +85,6 @@ export function renderScene(
   if (allHit) {
     ctx.fillStyle = "#22c55e";
     ctx.font = "20px sans-serif";
-    ctx.fillText("Simulation successful. No targets remaining.", 16, 102);
+    ctx.fillText("Simulation successful. No targets remaining!", 16, 102);
   }
 }

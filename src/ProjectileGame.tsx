@@ -42,6 +42,12 @@ export const ProjectileGame: React.FC = () => {
     };
   }, []);
 
+  const handleReset = () => {
+    if (engineRef.current) {
+      engineRef.current.reset();
+    }
+  };
+
   return (
     <div
       style={{
@@ -49,8 +55,10 @@ export const ProjectileGame: React.FC = () => {
         height: "100vh",
         background: "#020617",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        gap: "1rem",
       }}
     >
       <canvas
@@ -59,9 +67,22 @@ export const ProjectileGame: React.FC = () => {
           border: "2px solid #4b5563",
           background: "#111827",
           borderRadius: 8,
-          boxShadow: "0 0 40px rgba(0,0,0,0.7)"
+          boxShadow: "0 0 40px rgba(0,0,0,0.7)",
         }}
       />
+      <button
+        onClick={handleReset}
+        style={{
+          background: "#374151",
+          color: "#e5e7eb",
+          border: "1px solid #4b5563",
+          padding: "0.5rem 1rem",
+          borderRadius: 4,
+          cursor: "pointer",
+        }}
+      >
+        Reset
+      </button>
     </div>
   );
 };
